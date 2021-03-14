@@ -129,6 +129,57 @@
           </div>
         </v-radio-group>
 
+
+        <label for="imageUrl">Image</label>
+        <div v-if="picurl">
+        <!-- A preview of the image. -->
+          <img :src="picurl" class="w-10 md:w-10 h-auto object-cover inline-block" alt="">
+        </div>
+        <!-- Clicking this button triggers the "click" event of the file input. -->
+        <v-btn v-if="!picurl" :disabled="isUploadingImage" type="button" @click="launchImageFile">
+          {{ isUploadingImage ? 'Uploading...' : 'Upload' }}
+        </v-btn>
+        <input ref="imageFile" type="file" accept="image/png, image/jpeg" hidden @change.prevent="uploadImageFile($event.target.files)">
+        <v-text-field
+                    v-model="Firstname"
+                    label="First Name"
+                    required
+                    filled
+                    rounded
+                    dense
+                    solo-inverted
+                  ></v-text-field
+                >
+                <v-text-field
+                    v-model="Lastname"
+                    label="Lastname"
+                    required
+                    filled
+                    rounded
+                    dense
+                    solo-inverted
+                  ></v-text-field
+                >
+                <v-text-field
+                    v-model="Tel"
+                    label="Tel"
+                    required
+                    filled
+                    rounded
+                    dense
+                    solo-inverted
+                  ></v-text-field
+                >
+                <v-text-field
+                    v-model="numberID"
+                    label="PassPort ID"
+                    required
+                    filled
+                    rounded
+                    dense
+                    solo-inverted
+                  ></v-text-field
+                >
 <div class="text-right">
       
       <br /><br />
@@ -176,7 +227,7 @@
 </template>
 
 <script>
-import { db } from '~/plugins/firebaseConfig.js'
+import { db,st } from '~/plugins/firebaseConfig.js'
 import 'vue-hotel-datepicker/dist/vueHotelDatepicker.css';
 export default {
   data() {
@@ -194,6 +245,10 @@ export default {
       radios: '',
       menu1: false,
       menu2: false,
+      pic: null,
+      picurl: null,
+      isUploadingImage: false,
+      isDeletingImage: false,
       sum: '',
       nameRules: [(v) => !!v || 'please required'],
       data: [],
@@ -223,8 +278,66 @@ export default {
       this.sum = day / (1000 & 60 * 60)
       console.log('DAY' + this.day)
     },
+
+    uploadImageFile (files) {
+      if (!files.length) {
+        return
+      }
+      const file = files[0]
+
+      if (!file.type.match('image.*')) {
+        alert('Please upload an image.')
+        return
+      }
+
+      const metadata = {
+        contentType: file.type
+      }
+
+      this.isUploadingImage = true
+
+      // Create a reference to the destination where we're uploading
+      // the file.
+      const imageRef = st.ref(`slip/${file.name}`)
+
+      const uploadTask = imageRef.put(file, metadata).then((snapshot) => {
+        // Once the image is uploaded, obtain the download URL, which
+        // is the publicly accessible URL of the image.
+        return snapshot.ref.getDownloadURL().then((url) => {
+          return url
+        })
+      }).catch((error) => {
+        console.error('Error uploading image', error)
+      })
+
+      // When the upload ends, set the value of the blog image URL
+      // and signal that uploading is done.
+      uploadTask.then((url) => {
+        this.picurl = url
+        this.isUploadingImage = false
+      })
+    },
+    launchImageFile () {
+      // Trigger the file input click event.
+      this.$refs.imageFile.click()
+    },
+    deleteImage () {
+      this.$firebase.st().refFromURL(this.blog.imageUrl).delete()
+        .then(() => {
+          this.blog.imageUrl = ''
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('Error deleting image', error)
+        })
+    },
+
     addData() {
       const data = {
+        Firstname: this.Firstname,
+        Lastname: this.Lastname,
+        Tel: this.Tel,
+        numberID: this.numberID,
         DateStart: this.DateStart,
         DateEnd: this.DateEnd,
         day: this.day,

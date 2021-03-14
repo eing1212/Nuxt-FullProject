@@ -66,7 +66,7 @@ export default {
         {
           icon: 'mdi-cart-arrow-down',
           title: 'Order',
-          to: '/carOrder',
+          to: '/order',
         },
          {
            icon: 'mdi-credit-card-outline',

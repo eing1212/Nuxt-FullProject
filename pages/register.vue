@@ -9,45 +9,48 @@
           <v-container>
             <v-form>
               <v-row>
-                <v-col cols="6">
-                  <v-text-field
-                    v-model="FirstName"
-                    label="FirstName"
-                    required
-                    filled
-                    rounded
-                    dense
-                    solo-inverted
-                    :rules="emailRules"
-                  ></v-text-field
-                >
-                </v-col> <v-col cols="6">
-                  <v-text-field
-                    v-model="LastName"
-                    label="LastName"
-                    required
-                    filled
-                    rounded
-                    dense
-                    solo-inverted
-                    :rules="emailRules"
-                  ></v-text-field></v-col>
-                   <v-col cols="12">
-                  <v-text-field
-                    v-model="NumberID"
-                    label="NumberID"
-                    required
-                    filled
-                    rounded
-                    dense
-                    solo-inverted
-                    :rules="emailRules"
-                  ></v-text-field
-                >
-                </v-col>
-                <!-- /////////////////////////////////// -->
                 <v-col cols="12">
                   <h1 class="logtitle">Sign up</h1>
+                  <v-text-field
+                    v-model="Firstname"
+                    label="First Name"
+                    required
+                    filled
+                    rounded
+                    dense
+                    solo-inverted
+                  ></v-text-field
+                >
+                <v-text-field
+                    v-model="Lastname"
+                    label="Lastname"
+                    required
+                    filled
+                    rounded
+                    dense
+                    solo-inverted
+                  ></v-text-field
+                >
+                <v-text-field
+                    v-model="Tel"
+                    label="Tel"
+                    required
+                    filled
+                    rounded
+                    dense
+                    solo-inverted
+                  ></v-text-field
+                >
+                <v-text-field
+                    v-model="numberID"
+                    label="PassPort ID"
+                    required
+                    filled
+                    rounded
+                    dense
+                    solo-inverted
+                  ></v-text-field
+                >
                   <v-text-field
                     v-model="email"
                     label="E-mail"
@@ -99,10 +102,10 @@
                   class="container-btn"
                   color="#DCB13C"
                   @click="signUp()"
+                  v-on:click="confirm"
                 >
                   SIGN UP
-                </v-btn></v-hover
-              >
+                </v-btn></v-hover>
             </v-form>
           </v-container>
         </v-col>
@@ -113,12 +116,17 @@
 
 <script>
 import firebase from 'firebase/app'
+import { db } from '~/plugins/firebaseConfig.js'
 import { auth } from '~/plugins/firebaseConfig.js'
 export default {
   layout: 'login',
   data() {
     return {
       show2: false,
+      Firstname:'',
+      Lastname:'',
+      Tel:'',
+      numberID:'',
       email: '',
       password: '',
       clock: {
@@ -168,8 +176,26 @@ export default {
       var user = auth.currentUser
       console.log(user === null)
     },
-  },
-}
+
+    confirm() {
+        const data = {
+        Firstname : this.Firstname,
+        Lastname : this.Lastname,
+        Tel : this.Tel,
+        numberID : this.numberID
+        }
+        db.collection('DBEmployee')
+        .doc()
+        .set(data)
+        .then(function () {
+          console.log('Document successfully written! -> MyForm')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+    }
+    }
+  }
 </script>
 <style>
 .sp {
