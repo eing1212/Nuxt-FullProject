@@ -63,16 +63,16 @@ export default {
           title: 'Shop',
           to: '/ShopEmployee',
         },
-        {
-          icon: 'mdi-cart-arrow-down',
-          title: 'Order',
-          to: '/order',
-        },
-         {
-           icon: 'mdi-credit-card-outline',
-           title: 'Payment',
-           to: '/payment',
-         },
+        // {
+        //   icon: 'mdi-cart-arrow-down',
+        //   title: 'Order',
+        //   to: '/order',
+        // },
+        //  {
+        //    icon: 'mdi-credit-card-outline',
+        //    title: 'Payment',
+        //    to: '/payment',
+        //  },
       ],
       miniVariant: false,
       right: true,
