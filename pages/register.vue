@@ -2,10 +2,8 @@
   <div class="login100">
     <v-card class="wrap-login100" color="rgba(255, 255, 255, 0.75)">
       <v-row class="center"
-        ><v-col cols="6">
-          <v-img src="https://illustoon.com/photo/1774.png"></v-img
-        ></v-col>
-        <v-col cols="6">
+        >
+        <v-col cols="12">
           <v-container>
             <v-form>
               <v-row>
@@ -39,16 +37,18 @@
                     rounded
                     dense
                     solo-inverted
+                    
                   ></v-text-field
                 >
                 <v-text-field
                     v-model="numberID"
-                    label="PassPort ID"
+                    label="Number ID"
                     required
                     filled
                     rounded
                     dense
                     solo-inverted
+                   
                   ></v-text-field
                 >
                   <v-text-field
@@ -78,23 +78,7 @@
                     @click:append="show2 = !show2"
                   ></v-text-field
                 ></v-col>
-                <!-- <v-col cols="12">
-                  <v-text-field
-                    v-model="confirmpassword"
-                    :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :type="show2 ? 'text' : 'password'"
-                    name="input-10-2"
-                    label="Confirm Password"
-                    class="input-group--focused"
-                    filled
-                    rounded
-                    dense
-                    solo-inverted
-                    :rules="[comparepasswords]"
-                    @click:append="show2 = !show2"
-                    required
-                  ></v-text-field></v-col
-              > -->
+               
               </v-row>
               <v-hover>
                 <v-btn
@@ -105,6 +89,16 @@
                   v-on:click="confirm"
                 >
                   SIGN UP
+                </v-btn></v-hover>
+                 <v-hover>
+                <v-btn
+                  rounded
+                  class="container-btn"
+                  color="#DCB13C" 
+                  style="margin-top: 0.5rem;"
+                        href= /
+                >
+                  กลับไปหน้าล็อคอิน
                 </v-btn></v-hover>
             </v-form>
           </v-container>
@@ -147,6 +141,14 @@ export default {
       required: value => !!value || 'Required.',
       min: v => v.length >= 8 || 'Min 8 characters'
       },
+      // TelRules: {
+      //   required: value => !!value || 'Required.',
+      //   min: v => v.length >= 8 || 'Min 10 characters'
+      // },
+      //  NumRules: {
+      //   required: value => !!value || 'Required.',
+      //   min: v => v.length >= 8 || 'Min 13 characters'
+      // }
     }
   },
 //   computed: {
@@ -218,7 +220,7 @@ export default {
   padding-bottom: 54px;
 }
 .wrap-login100 {
-  width: 960px;
+  width: 900px;
   border-radius: 20px;
   overflow: hidden;
   display: -webkit-box;

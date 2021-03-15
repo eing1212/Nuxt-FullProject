@@ -1,66 +1,70 @@
 <template>
-  <div class="login100">
-      <v-card class="wrap-login100" color="rgba(255, 255, 255, 0.75)">
-        <v-row class="center"
-          ><v-col cols="6">
-            <v-img
-              src="https://illustoon.com/photo/1774.png"
-            ></v-img
-          ></v-col>
-          <v-col cols="6">
-            <v-container>
-              <v-form>
-                <v-row>
-                  <v-col cols="12">
-                    <h1 class="logtitle">Sign in</h1>
-                    <v-text-field
-                      v-model="email"
-                      label="E-mail"
-                      required
-                      filled
-                      rounded
-                      dense
-                      solo-inverted
-                      :rules="emailRules"
-                    ></v-text-field
-                  ></v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="password"
-                      :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                      :type="show2 ? 'text' : 'password'"
-                      :rules="[rules.required, rules.min]"
-                      name="input-10-2"
-                      label="Password"
-                      class="input-group--focused"
-                      filled
-                      rounded
-                      dense
-                      solo-inverted
-                      @click:append="show2 = !show2"
-                    ></v-text-field></v-col
-                ></v-row>
-                <v-hover>
-                  <v-btn
-                    rounded
-                    class="container-btn"
-                    color="#DCB13C"
-                    @click="login()"
+<div>
+  <v-container
+    ><v-row justify="center" style="margin-top: 15%">
+      <v-col cols="12" sm="6" style="margin-top: 5%">
+        <h3>ยินดีต้อนรับสู่</h3>
+        <h1 style="color: #03a9f4; margin-top:0.5rem; margin-bottom:0.5rem">SKYCAR</h1>
+        <h4>เว็บไซต์เช่ารถยนต์รายวันที่ดีที่สุดในเชียงใหม่</h4>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <h4 style="margin-bottom:0.7rem;">ให้เราพาคุณไปสู่ที่ที่คุณต้องการ</h4>
+        <v-divider style="margin-bottom:0.7rem;" class="dvd" />
+        <v-subtitle>ชื่อหรืออีเมลผู้ใช้</v-subtitle>
+        <v-text-field
+          v-model="email"
+          label="E-mail"
+          solo
+          dense
+          rounded
+          :rules="emailRules"
+          style="margin-top: 0.5rem"
+        ></v-text-field>
+        <v-list-item-subtitle>รหัสผ่าน</v-list-item-subtitle>
+        <v-text-field
+          v-model="password"
+          :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="show2 ? 'text' : 'password'"
+          :rules="[rules.required, rules.min]"
+          label="Password"
+          solo
+          dense
+          rounded
+          style="margin-top: 0.5rem"
+        ></v-text-field>
+        <div class="text-center dvd">
+          <v-btn rounded color="light-blue" style="margin-bottom: 0.5rem" dark  @click="login()"> เข้าสู่ระบบ </v-btn>
+        </div>
+        <v-divider style="margin-bottom:0.7rem;" class="dvd" />
+        <h4>เจอเราเป็นครั้งแรก? ไม่เป็นไรสมัครสมาชิกสิ</h4>
+        <div class="text-center dvd">
+          <v-btn rounded color="gee" style="margin-top: 0.5rem" dark href="/register" > สมัครสมาชิก </v-btn>
+        </div>
+      </v-col>
+    </v-row>
+    <v-col sm="12">
+          <v-row>
+            <v-col sm="6">
+              <div class="text-center">
+                <v-btn
+                  text
+                  href= https://sky-rental-admin.web.app/
                   >
-                    SIGN IN
-                  </v-btn></v-hover
-                >
-                <v-hover>
-                  <v-btn class="sp" color="red" href="/register" nuxt rounded>
-                    SIGN UP
-                  </v-btn></v-hover
-                >
-              </v-form>
-            </v-container>
-          </v-col>
-        </v-row>
-      </v-card>
-    </div>
+      For Admin
+    </v-btn><v-btn
+      text
+      href= https://sky-rental-customer.web.app/
+    >
+      For Owner
+    </v-btn>
+              </div>
+              
+            </v-col>
+          </v-row>
+        </v-col>
+  </v-container>
+</div>
+        
 </template>
 
 <script>
@@ -82,13 +86,13 @@ export default {
         },
       },
       emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+        (v) => !!v || 'E-mail is required',
+        (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
       show1: false,
       rules: {
-      required: value => !!value || 'Required.',
-      min: v => v.length >= 8 || 'Min 8 characters'
+        required: (value) => !!value || 'Required.',
+        min: (v) => v.length >= 8 || 'Min 8 characters',
       },
     }
   },
@@ -121,17 +125,17 @@ export default {
           console.log('user x : ' + user)
           alert('login successful!')
           //if (user.email == 'admin123@gmail.com') {
-            //password:123123
-           // console.log('admin')
+          //password:123123
+          // console.log('admin')
           //  this.$router.replace('/admin')
-         // } else if (user.email == 'owner123@gmail.com') {
-            //password:123123
+          // } else if (user.email == 'owner123@gmail.com') {
+          //password:123123
           //  console.log('owner')
           //  this.$router.replace('/owner')
-         // } else {
-            console.log('user x') //email:hamhxm@gmail.com password:123123
-            this.$router.replace('/ShopEmployee')
-           //loginเแบบล็อคอีเมลล์ในหน้าเดียว
+          // } else {
+          console.log('user x') //email:hamhxm@gmail.com password:123123
+          this.$router.replace('/ShopEmployee')
+          //loginเแบบล็อคอีเมลล์ในหน้าเดียว
         })
 
         .catch((error) => {

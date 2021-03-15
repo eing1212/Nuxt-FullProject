@@ -110,11 +110,11 @@ export default {
 
 <style>
 .theme--dark.v-application {
-  background: rgb(0, 0, 0);
+  background: rgb(198, 244, 250);
   background: linear-gradient(
     38deg,
-    rgba(0, 0, 0, 1) 3%,
-    rgba(25, 91, 125, 1) 63%
+    rgb(163, 226, 241) 3%,
+    rgb(86, 159, 196) 63%
   );
 }
 
@@ -126,11 +126,11 @@ export default {
     rgba(59, 133, 226, 1) 94%
   );
 }
-.theme--light.v-sheet {
+/* .theme--light.v-sheet {
   background-color: #252525;
   border-color: #7a7676;
   color: #ffff;
-}
+} */
 .blublack {
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -139,4 +139,5 @@ export default {
     rgba(25, 91, 125, 1) 63%
   );
 }
+
 </style>
