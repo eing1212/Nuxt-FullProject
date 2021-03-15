@@ -230,7 +230,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 50px 50px 50px 95px;
+  padding: 50px 50px 50px 50px;
 }
 .login100 {
   width: 100%;
